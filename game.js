@@ -25,6 +25,14 @@ class Gomoku {
         this.whiteScore = 0;
         this.moveHistory = [];
 
+        // 添加横屏提示控制
+        const landscapeTip = document.querySelector('.landscape-tip');
+        if (landscapeTip) {
+            setTimeout(() => {
+                landscapeTip.style.display = 'none';
+            }, 3000); // 3秒后自动隐藏提示
+        }
+        
         this.init();
     }
 
@@ -144,7 +152,7 @@ class Gomoku {
             this.ctx.fillStyle = innerShadow;
             this.ctx.fill();
 
-            // 添加高光效果
+            // 添加高���效果
             const highlight = this.ctx.createRadialGradient(
                 centerX - radius/2, centerY - radius/2,
                 0,

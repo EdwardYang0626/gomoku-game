@@ -672,4 +672,31 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     animation: winTextScale 0.5s ease-out forwards;
     z-index: 10000;
+}
+
+/* 横屏提示样式 */
+.landscape-tip {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    .landscape-tip {
+        display: block;
+    }
 } 
