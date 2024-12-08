@@ -10,19 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      # 安装 Node.js（如果您的项目需要构建）
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-          
-      # 如果需要安装依赖和构建，取消下面的注释
-      # - name: Install dependencies
-      #   run: npm install
-      
-      # - name: Build
-      #   run: npm run build
 
       - name: Set up SSH
         run: |
