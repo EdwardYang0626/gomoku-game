@@ -3,7 +3,21 @@ class Gomoku {
         this.canvas = document.getElementById('gameBoard');
         this.ctx = this.canvas.getContext('2d');
         this.boardSize = 15; // 15x15的棋盘
-        this.cellSize = this.canvas.width / this.boardSize;
+        
+        // 添加画布大小自适应
+        const updateCanvasSize = () => {
+            const width = Math.min(600, window.innerWidth - 40);
+            this.canvas.width = width;
+            this.canvas.height = width;
+            this.cellSize = width / this.boardSize;
+            this.drawBoard();
+            this.redrawAllPieces();
+        };
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', updateCanvasSize);
+        updateCanvasSize();
+        
         this.board = Array(this.boardSize).fill().map(() => Array(this.boardSize).fill(null));
         this.currentPlayer = 'black'; // 黑子先手
         this.gameOver = false;

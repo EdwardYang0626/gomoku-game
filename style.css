@@ -596,6 +596,21 @@ body {
         transform: none !important;
         box-shadow: var(--shadow-sm);
     }
+
+    #gameBoard {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 400px;
+    }
+
+    .game-container {
+        padding: 20px;
+    }
+
+    .score-display {
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
 /* 胜利动画样式 */
