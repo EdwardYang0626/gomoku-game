@@ -1,152 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>五子棋 - 现代演绎</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="description" content="现代演绎的五子棋游戏，简约设计，沉浸体验。">
-    <meta name="keywords" content="五子棋,游戏,在线游戏,棋类游戏">
+    <title>五子棋</title>
+    <style>
+        .game-container {
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="landscape-tip">
-        横屏体验更佳 📱
+    <div class="game-container">
+        <canvas id="gameBoard" width="600" height="600"></canvas>
+        <br>
+        <button id="restart-btn">重新开始</button>
     </div>
-    <nav class="nav">
-        <div class="nav-content">
-            <a href="#" class="nav-logo">
-                <svg height="24" viewBox="0 0 24 24" width="24">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-                五子棋
-            </a>
-            <div class="nav-links">
-                <a href="#game">游戏</a>
-                <a href="#features">特性</a>
-                <a href="#about">关于</a>
-                <button class="nav-cta">开始游戏</button>
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="gradient-text">五子棋</span>
-                    <br>
-                    <span class="subtitle">传统与现代的完美融合</span>
-                </h1>
-                <p class="hero-description">体验经典棋类游戏的全新演绎，简约设计，沉浸体验。</p>
-                <div class="hero-cta">
-                    <a href="#game" class="btn btn-primary">开始游戏</a>
-                    <a href="#tutorial" class="btn btn-secondary">查看教程</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="floating-piece black"></div>
-                <div class="floating-piece white"></div>
-                <div class="floating-board"></div>
-            </div>
-        </section>
-
-        <section class="game-section" id="game">
-            <div class="section-content">
-                <div class="game-container">
-                    <div class="game-header">
-                        <div class="score-display">
-                            <div class="player black">
-                                <div class="piece black"></div>
-                                <div class="player-info">
-                                    <span class="player-name">黑方</span>
-                                    <span class="score" id="black-score">0</span>
-                                </div>
-                            </div>
-                            <div class="vs-badge">VS</div>
-                            <div class="player white">
-                                <div class="piece white"></div>
-                                <div class="player-info">
-                                    <span class="player-name">白方</span>
-                                    <span class="score" id="white-score">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="game-board-wrapper">
-                        <div class="current-player-badge" id="current-player">
-                            <div id="player-turn-piece" class="piece black"></div>
-                            <span id="player-turn">黑方回合</span>
-                        </div>
-                        <div class="game-board-container">
-                            <canvas id="gameBoard" width="600" height="600"></canvas>
-                        </div>
-                        <div class="game-controls">
-                            <button id="undo-btn" class="btn btn-secondary">
-                                <svg width="16" height="16" viewBox="0 0 16 16">
-                                    <path d="M8 3L4 7L8 11" stroke="currentColor" fill="none" stroke-width="2"/>
-                                    <path d="M4 7H12" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                悔棋
-                            </button>
-                            <button id="restart-btn" class="btn btn-primary">
-                                <svg width="16" height="16" viewBox="0 0 16 16">
-                                    <path d="M13 8A5 5 0 103 8" stroke="currentColor" fill="none" stroke-width="2"/>
-                                    <path d="M13 3L13 8L8 8" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                                重新开始
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="features-section" id="features">
-            <div class="section-content">
-                <h2 class="section-title">游戏特性</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🎮</div>
-                        <h3>简约操作</h3>
-                        <p>直观的点击式操作，让游戏更加流畅自然</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡️</div>
-                        <h3>即时响应</h3>
-                        <p>快速的响应速度，无缝的游戏体验</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>智能判定</h3>
-                        <p>准确的胜负判定，公平的游戏环境</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <svg height="24" viewBox="0 0 24 24" width="24">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-                五子棋
-            </div>
-            <div class="footer-links">
-                <a href="#privacy">隐私政策</a>
-                <a href="#terms">使用条款</a>
-                <a href="#contact">联系我们</a>
-            </div>
-            <div class="footer-copyright">
-                <p>专为游戏体验优化</p>
-                <p>&copy; 2024 五子棋. 保留所有权。</p>
-            </div>
-        </div>
-    </footer>
-
     <script src="game.js"></script>
 </body>
 </html> 
