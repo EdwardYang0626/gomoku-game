@@ -1,0 +1,43 @@
+name: Deploy to Aliyun ECS
+
+on:
+  push:
+    branches:
+      - main  # 如果您的主分支是 master，请修改这里
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      # 安装 Node.js（如果您的项目需要构建）
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          
+      # 如果需要安装依赖和构建，取消下面的注释
+      # - name: Install dependencies
+      #   run: npm install
+      
+      # - name: Build
+      #   run: npm run build
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ALIYUN_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.ALIYUN_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to ECS
+        run: |
+          # 创建部署目录（如果不存在）
+          ssh ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }} "mkdir -p /var/www/gomoku"
+          
+          # 复制文件到服务器
+          scp -r ./* ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }}:/var/www/gomoku/
+          
+          # 设置权限
+          ssh ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }} "cd /var/www/gomoku && chmod -R 755 ."
