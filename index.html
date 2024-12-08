@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>五子棋1</title>
-    <style>
-        .game-container {
-            text-align: center;
-            padding: 20px;
-        }
-        canvas {
-            border: 1px solid #ccc;
-        }
-        button {
-            margin: 10px;
-            padding: 5px 10px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋 - 现代版</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
+        <div class="player-info">
+            <div class="player active">
+                <div class="player-piece black"></div>
+                <div class="player-details">
+                    <span class="player-name">黑方</span>
+                    <span class="player-score">得分: 0</span>
+                </div>
+            </div>
+            <div class="player">
+                <div class="player-piece white"></div>
+                <div class="player-details">
+                    <span class="player-name">白方</span>
+                    <span class="player-score">得分: 0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-status" id="gameStatus">
+            <span class="status-text">当前回合：黑方</span>
+        </div>
+        
         <canvas id="gameBoard" width="600" height="600"></canvas>
-        <br>
-        <button id="restart-btn">重新开始</button>
+        
+        <div class="controls">
+            <button id="restart-btn" class="btn btn-primary">
+                <span>重新开始</span>
+            </button>
+            <button id="undo-btn" class="btn btn-secondary">
+                <span>悔棋</span>
+            </button>
+        </div>
     </div>
+    
     <script src="game.js"></script>
 </body>
 </html> 

@@ -1,20 +1,22 @@
 :root {
-    --primary-gradient: linear-gradient(135deg, #0061D3 0%, #2997FF 100%);
-    --secondary-gradient: linear-gradient(135deg, #6B7280 0%, #86868b 100%);
-    --background-gradient: linear-gradient(135deg, #F9FAFB 0%, #FBFBFD 100%);
-    --accent-gradient: linear-gradient(135deg, #FF2D55 0%, #FF375F 100%);
-    --primary-color: #2997ff;
-    --secondary-color: #86868b;
-    --background-color: #fbfbfd;
-    --text-color: #1d1d1f;
-    --border-color: rgba(0, 0, 0, 0.1);
-    --hover-color: #0077ed;
-    --radius-small: 12px;
-    --radius-medium: 18px;
-    --radius-large: 24px;
-    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 8px 16px -2px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --primary-gradient: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    --secondary-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    --background-gradient: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+    --accent-gradient: linear-gradient(135deg, #EC4899 0%, #D946EF 100%);
+    
+    --primary-color: #4F46E5;
+    --secondary-color: #3B82F6;
+    --background-color: #F8FAFC;
+    --text-color: #1E293B;
+    --border-color: #E2E8F0;
+    
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
 }
 
 * {
@@ -251,10 +253,24 @@ body {
 }
 
 .game-container {
-    background: var(--background-gradient);
-    border-radius: var(--radius-large);
-    padding: 40px;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
 }
 
 .game-header {
@@ -275,12 +291,29 @@ body {
 .player {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+}
+
+.player.active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--primary-gradient);
+    color: white;
 }
 
 .player-info {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--background-gradient);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .piece {
@@ -364,10 +397,17 @@ body {
 }
 
 #gameBoard {
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    margin: 1rem auto;
     display: block;
-    margin: 0 auto;
-    border-radius: var(--radius-medium);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+#gameBoard:hover {
+    transform: translateY(-4px);
 }
 
 .game-controls {
@@ -378,35 +418,42 @@ body {
 }
 
 .btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 980px;
-    font-size: 16px;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
     font-weight: 500;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn svg {
-    transition: transform 0.3s ease;
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
 }
 
-.btn:hover svg {
-    transform: scale(1.1);
+.btn:hover::before {
+    width: 300%;
+    height: 300%;
 }
 
 .btn-primary {
     background: var(--primary-gradient);
     color: white;
     box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background: var(--hover-color);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -698,5 +745,80 @@ body {
 @media (max-width: 768px) and (orientation: portrait) {
     .landscape-tip {
         display: block;
+    }
+}
+
+/* 更新状态显示 */
+.game-status {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--background-gradient);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-status::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--secondary-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+}
+
+.game-status:hover::after {
+    transform: scaleX(1);
+}
+
+/* 更新玩家信息显示 */
+.player-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.player-piece {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.player-piece.black {
+    background: var(--text-color);
+}
+
+.player-piece.white {
+    background: white;
+    border: 2px solid var(--text-color);
+}
+
+/* 添加响应式设计 */
+@media (max-width: 640px) {
+    .game-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    #gameBoard {
+        width: 100%;
+        height: auto;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
     }
 } 
