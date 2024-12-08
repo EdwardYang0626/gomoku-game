@@ -3,7 +3,7 @@ name: Deploy to Aliyun ECS
 on:
   push:
     branches:
-      - main  # 如果您的主分支是 master，请修改这里
+      - main
 
 jobs:
   deploy:
@@ -17,6 +17,10 @@ jobs:
           echo "${{ secrets.ALIYUN_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.ALIYUN_HOST }} >> ~/.ssh/known_hosts
+          
+          # 添加调试信息
+          echo "Testing SSH connection..."
+          ssh -v ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }} "pwd"
 
       - name: Deploy to ECS
         run: |
@@ -24,7 +28,7 @@ jobs:
           ssh ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }} "mkdir -p /var/www/gomoku"
           
           # 复制文件到服务器
-          scp -r ./* ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }}:/var/www/gomoku/
+          scp -v -r ./* ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }}:/var/www/gomoku/
           
           # 设置权限
           ssh ${{ secrets.ALIYUN_USERNAME }}@${{ secrets.ALIYUN_HOST }} "cd /var/www/gomoku && chmod -R 755 ."
